@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>加拿大移民打分计算器（联邦 + 安省）</title>
+    <meta
+      name="description"
+      content="中文加拿大移民打分计算器：联邦 CRS、联邦 FSW 67 分、安省 OINP EOI。支持 URL 参数回填和分享链接。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=ZCOOL+XiaoWei&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-shape bg-shape-a" aria-hidden="true"></div>
+    <div class="bg-shape bg-shape-b" aria-hidden="true"></div>
+
+    <header class="hero container">
+      <p class="eyebrow">Canada PR Score Toolkit</p>
+      <h1>加拿大 PR 打分计算器</h1>
+      <p class="subtitle">
+        按官方规则整理：联邦 <strong>CRS (1200)</strong>、联邦 <strong>FSW (67/100)</strong>、安省
+        <strong>OINP EOI</strong>。支持 URL 参数回填，方便分享。
+      </p>
+      <div class="source-strip">
+        <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html" target="_blank" rel="noopener noreferrer">IRCC CRS 官方说明</a>
+        <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/eligibility/federal-skilled-workers/six-selection-factors-federal-skilled-workers.html" target="_blank" rel="noopener noreferrer">IRCC FSW 六项评分</a>
+        <a href="https://www.ontario.ca/page/ontario-immigrant-nominee-program-expression-interest-system-streams" target="_blank" rel="noopener noreferrer">Ontario OINP EOI 官方说明</a>
+      </div>
+    </header>
+
+    <main class="container main-grid">
+      <aside class="tool-nav" aria-label="计算器切换">
+        <button class="tool-tab is-active" data-tool="crs">联邦 CRS (1200)</button>
+        <button class="tool-tab" data-tool="fsw">联邦 FSW (67/100)</button>
+        <button class="tool-tab" data-tool="oinp">安省 OINP EOI</button>
+      </aside>
+
+      <section class="tool-panel is-active" id="tool-crs" data-tool-panel="crs">
+        <div class="panel-head">
+          <h2>联邦 CRS 计算器</h2>
+          <button type="button" class="ghost-btn" data-copy-link>复制分享链接</button>
+        </div>
+
+        <form id="form-crs" class="calc-form" autocomplete="off">
+          <details open>
+            <summary>核心人力资本（Core/Human Capital）</summary>
+            <div class="field-grid">
+              <label class="field">
+                <span><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html#spouse" target="_blank" rel="noopener noreferrer">是否有配偶/同居伴侣</a></span>
+                <select id="crs_has_spouse" data-param="crs_has_spouse">
+                  <option value="0">无</option>
+                  <option value="1">有</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html#spouse" target="_blank" rel="noopener noreferrer">年龄</a></span>
+                <select id="crs_age" data-param="crs_age">
+                  <option value="17">17 或以下</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                  <option value="24">24</option>
+                  <option value="25">25</option>
+                  <option value="26">26</option>
+                  <option value="27">27</option>
+                  <option value="28">28</option>
+                  <option value="29">29</option>
+                  <option value="30">30</option>
+                  <option value="31">31</option>
+                  <option value="32">32</option>
+                  <option value="33">33</option>
+                  <option value="34">34</option>
+                  <option value="35">35</option>
+                  <option value="36">36</option>
+                  <option value="37" selected>37</option>
+                  <option value="38">38</option>
+                  <option value="39">39</option>
+                  <option value="40">40</option>
+                  <option value="41">41</option>
+                  <option value="42">42</option>
+                  <option value="43">43</option>
+                  <option value="44">44</option>
+                  <option value="45">45+</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html#spouse" target="_blank" rel="noopener noreferrer">最高学历</a></span>
+                <select id="crs_education" data-param="crs_education">
+                  <option value="less_secondary">低于高中</option>
+                  <option value="secondary">高中</option>
+                  <option value="one_year">1 年专科/证书</option>
+                  <option value="two_year">2 年专科</option>
+                  <option value="bachelor" selected>本科或 3 年以上项目</option>
+                  <option value="two_or_more">两段以上学历（至少一段 3 年+）</option>
+                  <option value="master_or_professional">硕士/执业学位</option>
+                  <option value="phd">博士</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html#spouse" target="_blank" rel="noopener noreferrer">加拿大工作经验</a></span>
+                <select id="crs_canadian_exp" data-param="crs_canadian_exp">
+                  <option value="0" selected>0 年</option>
+                  <option value="1">1 年</option>
+                  <option value="2">2 年</option>
+                  <option value="3">3 年</option>
+                  <option value="4">4 年</option>
+                  <option value="5">5 年及以上</option>
+                </select>
+              </label>
+            </div>
+          </details>
+
+          <details open>
+            <summary>语言（第一官方语言 CLB）</summary>
+            <p class="hint-link">
+              <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html#spouse" target="_blank" rel="noopener noreferrer">CRS 官方语言分规则（第一官方语言）</a>
+            </p>
+            <div class="field-grid">
+              <label class="field"><span>阅读（CLB）</span><select id="crs_l1_r" data-param="crs_l1_r"></select></label>
+              <label class="field"><span>写作（CLB）</span><select id="crs_l1_w" data-param="crs_l1_w"></select></label>
+              <label class="field"><span>听力（CLB）</span><select id="crs_l1_l" data-param="crs_l1_l"></select></label>
+              <label class="field"><span>口语（CLB）</span><select id="crs_l1_s" data-param="crs_l1_s"></select></label>
+            </div>
+          </details>
+
+          <details>
+            <summary>第二官方语言（CLB）</summary>
+            <p class="hint-link">
+              <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html#spouse" target="_blank" rel="noopener noreferrer">CRS 官方语言分规则（第二官方语言）</a>
+            </p>
+            <div class="field-grid">
+              <label class="field"><span>阅读（CLB）</span><select id="crs_l2_r" data-param="crs_l2_r"></select></label>
+              <label class="field"><span>写作（CLB）</span><select id="crs_l2_w" data-param="crs_l2_w"></select></label>
+              <label class="field"><span>听力（CLB）</span><select id="crs_l2_l" data-param="crs_l2_l"></select></label>
+              <label class="field"><span>口语（CLB）</span><select id="crs_l2_s" data-param="crs_l2_s"></select></label>
+            </div>
+          </details>
+
+          <details>
+            <summary>配偶因素（有配偶时生效）</summary>
+            <p class="hint-link">
+              <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html#spouse" target="_blank" rel="noopener noreferrer">CRS 配偶因素官方说明</a>
+            </p>
+            <div class="field-grid">
+              <label class="field">
+                <span>配偶学历</span>
+                <select id="crs_spouse_education" data-param="crs_spouse_education">
+                  <option value="less_secondary">低于高中</option>
+                  <option value="secondary" selected>高中</option>
+                  <option value="one_year">1 年专科/证书</option>
+                  <option value="two_year">2 年专科</option>
+                  <option value="bachelor">本科或 3 年以上项目</option>
+                  <option value="two_or_more">两段以上学历（至少一段 3 年+）</option>
+                  <option value="master_or_professional">硕士/执业学位</option>
+                  <option value="phd">博士</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>配偶加拿大工作经验</span>
+                <select id="crs_spouse_canadian_exp" data-param="crs_spouse_canadian_exp">
+                  <option value="0" selected>0 年</option>
+                  <option value="1">1 年</option>
+                  <option value="2">2 年</option>
+                  <option value="3">3 年</option>
+                  <option value="4">4 年</option>
+                  <option value="5">5 年及以上</option>
+                </select>
+              </label>
+              <label class="field"><span>配偶阅读（CLB）</span><select id="crs_sp_l_r" data-param="crs_sp_l_r"></select></label>
+              <label class="field"><span>配偶写作（CLB）</span><select id="crs_sp_l_w" data-param="crs_sp_l_w"></select></label>
+              <label class="field"><span>配偶听力（CLB）</span><select id="crs_sp_l_l" data-param="crs_sp_l_l"></select></label>
+              <label class="field"><span>配偶口语（CLB）</span><select id="crs_sp_l_s" data-param="crs_sp_l_s"></select></label>
+            </div>
+          </details>
+
+          <details>
+            <summary>技能可迁移（Skill Transferability）</summary>
+            <p class="hint-link">
+              <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html#skill" target="_blank" rel="noopener noreferrer">CRS 可迁移因素官方表</a>
+            </p>
+            <div class="field-grid">
+              <label class="field">
+                <span>海外工作经验</span>
+                <select id="crs_foreign_exp" data-param="crs_foreign_exp">
+                  <option value="0" selected>0 年</option>
+                  <option value="1">1-2 年</option>
+                  <option value="3">3 年及以上</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>是否有技工资格证（Certificate of Qualification）</span>
+                <select id="crs_trade_cert" data-param="crs_trade_cert">
+                  <option value="0" selected>无</option>
+                  <option value="1">有</option>
+                </select>
+              </label>
+            </div>
+          </details>
+
+          <details>
+            <summary>附加分（Additional）</summary>
+            <p class="hint-link">
+              <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html#extra" target="_blank" rel="noopener noreferrer">CRS 附加分官方表</a>
+            </p>
+            <div class="field-grid">
+              <label class="field">
+                <span>加拿大兄弟姐妹（18+，公民/PR）</span>
+                <select id="crs_sibling" data-param="crs_sibling">
+                  <option value="0" selected>否</option>
+                  <option value="1">是（+15）</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>加拿大教育经历</span>
+                <select id="crs_canadian_edu" data-param="crs_canadian_edu">
+                  <option value="none" selected>无</option>
+                  <option value="one_or_two_year">1-2 年课程（+15）</option>
+                  <option value="three_plus_year">3 年及以上（+30）</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>法语附加分（NCLC/CLB 组合）</span>
+                <select id="crs_french_bonus" data-param="crs_french_bonus">
+                  <option value="none" selected>无</option>
+                  <option value="nclc7_englow">法语 NCLC7+ 且英语 CLB≤4/未测（+25）</option>
+                  <option value="nclc7_eng5">法语 NCLC7+ 且英语 CLB≥5（+50）</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>省提名（PNP Nomination）</span>
+                <select id="crs_pnp" data-param="crs_pnp">
+                  <option value="0" selected>无</option>
+                  <option value="1">有（+600）</option>
+                </select>
+              </label>
+            </div>
+          </details>
+        </form>
+
+        <div class="result-card" id="crs-result" aria-live="polite"></div>
+      </section>
+
+      <section class="tool-panel" id="tool-fsw" data-tool-panel="fsw">
+        <div class="panel-head">
+          <h2>联邦 FSW 67 分计算器</h2>
+          <button type="button" class="ghost-btn" data-copy-link>复制分享链接</button>
+        </div>
+
+        <form id="form-fsw" class="calc-form" autocomplete="off">
+          <div class="field-grid">
+            <label class="field">
+              <span><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/eligibility/federal-skilled-workers/six-selection-factors-federal-skilled-workers.html#age" target="_blank" rel="noopener noreferrer">年龄（最高 12）</a></span>
+              <select id="fsw_age" data-param="fsw_age">
+                <option value="17">17 或以下</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+                <option value="32">32</option>
+                <option value="33">33</option>
+                <option value="34">34</option>
+                <option value="35">35</option>
+                <option value="36">36</option>
+                <option value="37" selected>37</option>
+                <option value="38">38</option>
+                <option value="39">39</option>
+                <option value="40">40</option>
+                <option value="41">41</option>
+                <option value="42">42</option>
+                <option value="43">43</option>
+                <option value="44">44</option>
+                <option value="45">45</option>
+                <option value="46">46</option>
+                <option value="47">47+</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/eligibility/federal-skilled-workers/six-selection-factors-federal-skilled-workers.html#education" target="_blank" rel="noopener noreferrer">学历（最高 25）</a></span>
+              <select id="fsw_education" data-param="fsw_education">
+                <option value="less_secondary">低于高中</option>
+                <option value="secondary">高中</option>
+                <option value="one_year">1 年专科/证书</option>
+                <option value="two_year">2 年专科</option>
+                <option value="bachelor" selected>本科或 3 年以上项目</option>
+                <option value="two_or_more">两段以上学历（至少一段 3 年+）</option>
+                <option value="master_or_professional">硕士/执业学位</option>
+                <option value="phd">博士</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/eligibility/federal-skilled-workers/six-selection-factors-federal-skilled-workers.html#work" target="_blank" rel="noopener noreferrer">工作经验（最高 15）</a></span>
+              <select id="fsw_work_years" data-param="fsw_work_years">
+                <option value="0" selected>不足 1 年</option>
+                <option value="1">1 年</option>
+                <option value="2">2-3 年</option>
+                <option value="4">4-5 年</option>
+                <option value="6">6 年及以上</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/eligibility/federal-skilled-workers/six-selection-factors-federal-skilled-workers.html#employment" target="_blank" rel="noopener noreferrer">加拿大安排就业（最高 10）</a></span>
+              <select id="fsw_arranged_employment" data-param="fsw_arranged_employment">
+                <option value="0" selected>无</option>
+                <option value="1">有（+10）</option>
+              </select>
+            </label>
+          </div>
+
+          <details open>
+            <summary>第一官方语言（最高 24）</summary>
+            <p class="hint-link">
+              <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/eligibility/federal-skilled-workers/six-selection-factors-federal-skilled-workers.html#language" target="_blank" rel="noopener noreferrer">FSW 语言分官方说明</a>
+            </p>
+            <div class="field-grid">
+              <label class="field"><span>阅读 CLB</span><select id="fsw_l1_r" data-param="fsw_l1_r"></select></label>
+              <label class="field"><span>写作 CLB</span><select id="fsw_l1_w" data-param="fsw_l1_w"></select></label>
+              <label class="field"><span>听力 CLB</span><select id="fsw_l1_l" data-param="fsw_l1_l"></select></label>
+              <label class="field"><span>口语 CLB</span><select id="fsw_l1_s" data-param="fsw_l1_s"></select></label>
+            </div>
+          </details>
+
+          <div class="field-grid">
+            <label class="field">
+              <span><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/eligibility/federal-skilled-workers/six-selection-factors-federal-skilled-workers.html#language" target="_blank" rel="noopener noreferrer">第二官方语言（最高 4）</a></span>
+              <select id="fsw_second_lang" data-param="fsw_second_lang">
+                <option value="0" selected>任一能力低于 CLB5（+0）</option>
+                <option value="1">四项均 CLB5+（+4）</option>
+              </select>
+            </label>
+          </div>
+
+          <details>
+            <summary>适应力 Adaptability（总上限 10）</summary>
+            <p class="hint-link">
+              <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/eligibility/federal-skilled-workers/six-selection-factors-federal-skilled-workers.html#adaptability" target="_blank" rel="noopener noreferrer">FSW 适应力官方说明</a>
+            </p>
+            <div class="check-grid">
+              <label><input type="checkbox" id="fsw_adapt_spouse_lang" data-param="fsw_adapt_spouse_lang" /> 配偶语言 CLB4+（+5）</label>
+              <label><input type="checkbox" id="fsw_adapt_study_ca" data-param="fsw_adapt_study_ca" /> 你在加拿大读书（+5）</label>
+              <label><input type="checkbox" id="fsw_adapt_spouse_study_ca" data-param="fsw_adapt_spouse_study_ca" /> 配偶在加拿大读书（+5）</label>
+              <label><input type="checkbox" id="fsw_adapt_work_ca" data-param="fsw_adapt_work_ca" /> 你在加拿大工作（+10）</label>
+              <label><input type="checkbox" id="fsw_adapt_spouse_work_ca" data-param="fsw_adapt_spouse_work_ca" /> 配偶在加拿大工作（+5）</label>
+              <label><input type="checkbox" id="fsw_adapt_arranged" data-param="fsw_adapt_arranged" /> 你有 arranged employment（+5）</label>
+              <label><input type="checkbox" id="fsw_adapt_relative" data-param="fsw_adapt_relative" /> 加拿大近亲属（+5）</label>
+            </div>
+          </details>
+        </form>
+
+        <div class="result-card" id="fsw-result" aria-live="polite"></div>
+      </section>
+
+      <section class="tool-panel" id="tool-oinp" data-tool-panel="oinp">
+        <div class="panel-head">
+          <h2>安省 OINP EOI 计算器</h2>
+          <button type="button" class="ghost-btn" data-copy-link>复制分享链接</button>
+        </div>
+
+        <p class="tip">
+          说明：此处按 OINP EOI 公布因子计算五个流派；安省 Express Entry（HCP/FSSW/Skilled Trades）不走这套 EOI 分表。
+          <a href="https://www.ontario.ca/page/ontarios-express-entry-system-streams" target="_blank" rel="noopener noreferrer">查看官方说明</a>
+        </p>
+
+        <form id="form-oinp" class="calc-form" autocomplete="off">
+          <div class="field-grid">
+            <label class="field">
+              <span><a href="https://www.ontario.ca/page/ontario-immigrant-nominee-program-expression-interest-system-streams" target="_blank" rel="noopener noreferrer">选择流派</a></span>
+              <select id="oinp_stream" data-param="oinp_stream">
+                <option value="fw">Employer Job Offer: Foreign Worker</option>
+                <option value="ids">Employer Job Offer: In-Demand Skills</option>
+                <option value="is" selected>Employer Job Offer: International Student</option>
+                <option value="masters">Masters Graduate</option>
+                <option value="phd">PhD Graduate</option>
+              </select>
+            </label>
+          </div>
+
+          <details open>
+            <summary>就业 / 劳动力因素</summary>
+            <p class="hint-link"><a href="https://www.ontario.ca/page/ontario-immigrant-nominee-program-expression-interest-system-streams" target="_blank" rel="noopener noreferrer">EOI 就业因素官方说明</a></p>
+            <div class="field-grid">
+              <label class="field">
+                <span>Job Offer: NOC TEER</span>
+                <select id="oinp_teer" data-param="oinp_teer">
+                  <option value="teer01" selected>TEER 0/1（10）</option>
+                  <option value="teer23">TEER 2/3（8）</option>
+                  <option value="teer45">TEER 4/5（0）</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Job Offer: Broad Occupational Category</span>
+                <select id="oinp_broad" data-param="oinp_broad">
+                  <option value="cat023" selected>Category 0/2/3（10）</option>
+                  <option value="cat7">Category 7（7）</option>
+                  <option value="cat19">Category 1/9（5）</option>
+                  <option value="cat48">Category 4/8（4）</option>
+                  <option value="cat56">Category 5/6（3）</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Job Offer: Wage</span>
+                <select id="oinp_wage" data-param="oinp_wage">
+                  <option value="40" selected>≥ $40/h（10）</option>
+                  <option value="35">$35-$39.99（8）</option>
+                  <option value="30">$30-$34.99（7）</option>
+                  <option value="25">$25-$29.99（6）</option>
+                  <option value="20">$20-$24.99（5）</option>
+                  <option value="lt20">&lt; $20（0）</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Work/Study Permit Status</span>
+                <select id="oinp_permit" data-param="oinp_permit">
+                  <option value="valid" selected>有效（10）</option>
+                  <option value="invalid">无有效身份（0）</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Job Tenure with Employer</span>
+                <select id="oinp_tenure" data-param="oinp_tenure">
+                  <option value="ge6" selected>同岗位 ≥ 6 个月（3）</option>
+                  <option value="lt6">&lt; 6 个月 / 未在岗（0）</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Earnings History (CRA NOA)</span>
+                <select id="oinp_earnings" data-param="oinp_earnings">
+                  <option value="ge40" selected>某一年 ≥ $40k（3）</option>
+                  <option value="lt40">&lt; $40k（0）</option>
+                </select>
+              </label>
+            </div>
+          </details>
+
+          <details>
+            <summary>教育因素</summary>
+            <p class="hint-link"><a href="https://www.ontario.ca/page/ontario-immigrant-nominee-program-expression-interest-system-streams" target="_blank" rel="noopener noreferrer">EOI 教育因素官方说明</a></p>
+            <div class="field-grid">
+              <label class="field">
+                <span>Highest Level of Education</span>
+                <select id="oinp_edu" data-param="oinp_edu">
+                  <option value="phdmd">PhD / M.D.（10）</option>
+                  <option value="masters" selected>Masters（8）</option>
+                  <option value="bachelor">Bachelors（6）</option>
+                  <option value="grad_diploma">Graduate Diploma/Certificate（6）</option>
+                  <option value="undergrad">Undergraduate Diploma/Certificate（5）</option>
+                  <option value="trade">Apprenticeship/Trades（5）</option>
+                  <option value="less">Less than college/trade（0）</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Field of Study</span>
+                <select id="oinp_field" data-param="oinp_field">
+                  <option value="stem" selected>STEM/Health/Trades（12）</option>
+                  <option value="business">Business/Social/Legal/Education 等（6）</option>
+                  <option value="arts">Arts/BHASE/n.e.c（0）</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Canadian Education Experience</span>
+                <select id="oinp_can_edu" data-param="oinp_can_edu">
+                  <option value="multi">多于一个加拿大学历（10）</option>
+                  <option value="one" selected>一个加拿大学历（5）</option>
+                  <option value="none">无（0）</option>
+                </select>
+              </label>
+            </div>
+          </details>
+
+          <details>
+            <summary>语言因素</summary>
+            <p class="hint-link"><a href="https://www.ontario.ca/page/ontario-immigrant-nominee-program-expression-interest-system-streams" target="_blank" rel="noopener noreferrer">EOI 语言因素官方说明</a></p>
+            <div class="field-grid">
+              <label class="field">
+                <span>Official Language Ability</span>
+                <select id="oinp_lang" data-param="oinp_lang">
+                  <option value="clb9" selected>CLB 9+（10）</option>
+                  <option value="clb8">CLB 8（6）</option>
+                  <option value="clb7">CLB 7（4）</option>
+                  <option value="clb6">CLB 6 或以下（0）</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Knowledge of Official Languages</span>
+                <select id="oinp_official" data-param="oinp_official">
+                  <option value="two" selected>双语（10）</option>
+                  <option value="one">单语（5）</option>
+                </select>
+              </label>
+            </div>
+          </details>
+
+          <details>
+            <summary>区域化因素（Regionalization）</summary>
+            <p class="hint-link"><a href="https://www.ontario.ca/page/ontario-immigrant-nominee-program-expression-interest-system-streams" target="_blank" rel="noopener noreferrer">EOI 区域因素官方说明</a></p>
+            <div class="field-grid">
+              <label class="field">
+                <span>Location of Job Offer</span>
+                <select id="oinp_job_region" data-param="oinp_job_region">
+                  <option value="north" selected>Northern Ontario（10）</option>
+                  <option value="outside_gta">GTA 外（不含北安省）（8）</option>
+                  <option value="gta_no_tor">GTA 内（不含多伦多）（3）</option>
+                  <option value="toronto">Toronto（0）</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Location of Study</span>
+                <select id="oinp_study_region" data-param="oinp_study_region">
+                  <option value="north" selected>Northern Ontario（10）</option>
+                  <option value="outside_gta">GTA 外（不含北安省）（8）</option>
+                  <option value="gta_no_tor">GTA 内（不含多伦多）（3）</option>
+                  <option value="toronto">Toronto（0）</option>
+                  <option value="no_inperson">无面授（0）</option>
+                </select>
+              </label>
+            </div>
+          </details>
+        </form>
+
+        <div class="result-card" id="oinp-result" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <footer class="container footer-note">
+      <p>
+        免责声明：本工具用于自测与学习，不构成法律建议。请以 IRCC / Ontario 官网最新条文与抽签要求为准。
+      </p>
+      <p>
+        安省 Express Entry Skilled Trades 流派页面目前显示“暂停中”（页面更新：2026-02-24）。
+      </p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
